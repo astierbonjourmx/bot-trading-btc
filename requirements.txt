@@ -1,0 +1,7 @@
+pandas
+numpy
+ta
+yfinance
+joblib
+scikit-learn
+requests
