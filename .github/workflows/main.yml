@@ -1,0 +1,30 @@
+name: Bot Trading BTC
+
+on:
+  schedule:
+    # Esto significa: Ejecutar en el minuto 0 de cada hora
+    - cron: '0 * * * *'
+  workflow_dispatch: # Esto permite darle a un botón para probarlo manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Chequear código
+        uses: actions/checkout@v3
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar librerías
+        run: |
+          pip install -r requirements.txt
+
+      - name: Ejecutar Bot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python bot_vigilante.py
