@@ -2,9 +2,8 @@ name: Bot Trading BTC
 
 on:
   schedule:
-    # Esto significa: Ejecutar en el minuto 0 de cada hora
-    - cron: '0 * * * *'
-  workflow_dispatch: # Esto permite darle a un botón para probarlo manualmente
+    - cron: '0 * * * *' # Ejecutar cada hora
+  workflow_dispatch: # Botón manual
 
 jobs:
   build:
@@ -25,6 +24,9 @@ jobs:
 
       - name: Ejecutar Bot
         env:
+          # AQUI ESTABA EL ERROR: FALTABAN ESTAS 2 LINEAS
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          BINANCE_SECRET_KEY: ${{ secrets.BINANCE_SECRET_KEY }}
         run: python bot_vigilante.py
