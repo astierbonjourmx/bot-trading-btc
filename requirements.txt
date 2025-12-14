@@ -5,3 +5,5 @@ yfinance
 joblib
 scikit-learn
 requests
+ccxt
+
